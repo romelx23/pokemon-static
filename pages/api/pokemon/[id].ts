@@ -15,7 +15,7 @@ interface QueryParams extends NextApiRequest {
   };
 }
 
-export default async function handler(
+export default async function pokemonId(
   req: QueryParams,
   res: NextApiResponse<any>
 ) {
