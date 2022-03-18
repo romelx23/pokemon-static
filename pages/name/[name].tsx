@@ -9,10 +9,11 @@ interface Props {
 }
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+    const {name,sprites,id}=pokemon;
     const [isInFavorites, setisInFavorites] = useState<boolean>(false);
-
+    const image=sprites.other?.dream_world.front_default || sprites.other?.['official-artwork'].front_default || './no-image.png';
     useEffect(() => {
-        setisInFavorites(localFavorites.existInFavorites(pokemon.id));
+        setisInFavorites(localFavorites.existInFavorites(id));
     }, []);
 
     const handleFavorite = () => {
@@ -32,14 +33,14 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
     }
 
     return (
-        <Layout title={pokemon.name}>
+        <Layout title={name} img={image}>
             <Grid.Container css={{ marginTop: '5px' }} gap={2}>
                 <Grid xs={12} sm={4}>
                     <Card hoverable>
                         <Card.Body>
                             <Card.Image
-                                src={pokemon.sprites.other?.dream_world.front_default || pokemon.sprites.other?.['official-artwork'].front_default || './no-image.png'}
-                                alt={pokemon.name}
+                                src={sprites.other?.dream_world.front_default || sprites.other?.['official-artwork'].front_default || './no-image.png'}
+                                alt={name}
                                 width="100%"
                                 height={200}
                             />
@@ -49,7 +50,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                 <Grid xs={12} sm={8}>
                     <Card>
                         <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Text h1>{pokemon.name}</Text>
+                            <Text h1>{name}</Text>
                             <Button
                                 ghost={!isInFavorites}
                                 color="gradient"
@@ -61,8 +62,8 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                             <Text size={30}>Sprites</Text>
                             <Container direction='row' display='flex' gap={0}>
                                 <Image
-                                    src={pokemon.sprites.front_default || './no-image.png'}
-                                    alt={pokemon.name}
+                                    src={sprites.front_default || './no-image.png'}
+                                    alt={name}
                                     width="100"
                                     height={200}
                                 />

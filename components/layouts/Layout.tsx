@@ -3,11 +3,13 @@ import React, { FC } from 'react'
 import { Navbar } from '../ui';
 interface Props {
     title?: string;
+    img?: string;
 }
 
 const origin=(typeof window==='undefined')?'':window.location.origin
 
-export const Layout: FC<Props> = ({ children, title }) => {
+export const Layout: FC<Props> = ({ children, title, img }) => {
+    const image=img || `${origin}/img/banner.png`;
     return (
         <>
             <Head>
@@ -18,7 +20,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
 
                 <meta property="og:title" content={`Información sobre el ${title}`} />
                 <meta property="og:description" content={`Esta es la página sobre ${title}`} />
-                <meta property="og:image" content={`${origin}/img/banner.png`} />
+                <meta property="og:image" content={image} />
             </Head>
             {/* Nabvar */}
             <Navbar />

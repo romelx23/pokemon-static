@@ -94,8 +94,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 }
 
 // You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
-import { GetStaticPaths } from 'next'
-import { pokeApi } from '../../api';
+import { GetStaticPaths } from 'next';
 import { Pokemon } from '../../interfaces/pokemon';
 import { Button, Card, Container, Grid, Text, Image } from '@nextui-org/react';
 import { getPokemonInfo, localFavorites } from '../../utils';
@@ -120,7 +119,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       pokemon:await getPokemonInfo(id)
-    }
+    },
+    revalidate: 86400
   }
 }
 
