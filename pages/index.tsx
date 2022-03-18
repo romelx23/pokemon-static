@@ -19,9 +19,9 @@ const HomePage: NextPage<Props> = ({ pokemons }) => {
 
   return (
     <Layout title='Listado de Pokemons'>
+      
       <div className={styles.container}>
         <h1>Hola mundo</h1>
-        <Button color={'gradient'}>gato</Button>
       </div>
       <Grid.Container gap={2} justify="flex-start">
         {pokemons.map((pokemon, i) => (
