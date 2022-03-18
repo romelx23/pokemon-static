@@ -18,15 +18,15 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   const handleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id);
     setisInFavorites(!isInFavorites);
-    if(isInFavorites)return;
+    if (isInFavorites) return;
     confetti({
-      zIndex:999,
-      particleCount:100,
-      spread:160,
-      angle:-100,
-      origin:{
-        x:1,
-        y:0
+      zIndex: 999,
+      particleCount: 100,
+      spread: 160,
+      angle: -100,
+      origin: {
+        x: 1,
+        y: 0
       }
     });
   }
@@ -43,6 +43,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
                 width="100%"
                 height={200}
               />
+              <Text h2 css={{textAlign:'end'}}>#{pokemon.id}</Text>
             </Card.Body>
           </Card>
         </Grid>
@@ -104,21 +105,27 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   console.log(pokemons151);
   return {
     paths: pokemons151.map(id => ({ params: { id } })),
-    fallback: false
+    fallback: 'blocking'
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-//   const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`);
-//   const pokemon = {
-//     id:data.id,
-//     name: data.name,
-//     sprites: data.sprites,
-// }
+
+  const pokemon = await getPokemonInfo(id);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
   return {
     props: {
-      pokemon:await getPokemonInfo(id)
+      pokemon: await getPokemonInfo(id)
     },
     revalidate: 86400
   }
