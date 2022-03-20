@@ -14,14 +14,14 @@ export const Navbar = () => {
       padding: '0 20px',
       backgroundColor: theme?.colors?.gray900.value,
     }}>
-      <Image
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png"
-        width={70}
-        height={70}
-        alt='pokemon'
-      />
       <NextLink href='/' passHref>
-        <Link>
+        <Link css={{alignItems:'center'}}>
+          <Image
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png"
+            width={70}
+            height={70}
+            alt='pokemon'
+          />
           <Text color='white' h2>P</Text>
           <Text color='white' h3>okemón</Text>
         </Link>
